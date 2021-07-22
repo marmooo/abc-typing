@@ -22,10 +22,13 @@ function typeNormal(currNode){currNode.classList.remove('d-none');playAudio(keyb
 function underlineSpace(currNode){if(currNode.textContent==' '){currNode.style.removeProperty('text-decoration');}
 const nextNode=currNode.nextElementSibling;if(nextNode&&nextNode.textContent==' '){nextNode.style.textDecoration='underline';}}
 function nextProblem(){playAudio(correctAudio);typeIndex=0;solveCount+=1;typable();}
-function removeGuide(currNode){const prevNode=currNode.previousSiblingElement;if(prevNode){let key=prevNode.textContent;const button=simpleKeyboard.getButtonElement(key);button.classList.remove('bg-info');}
-let key=currNode.textContent;if(key==' '){key='{space}';}
+function removeGuide(currNode){const prevNode=currNode.previousSiblingElement;if(prevNode){let key=prevNode.textContent;if(gradeOption.selectedIndex==0){key=key.toUpperCase();}else{key=key.toLowerCase();}
+const button=simpleKeyboard.getButtonElement(key);button.classList.remove('bg-info');}
+let key=currNode.textContent;if(gradeOption.selectedIndex==1){key=key.toUpperCase();}else{key=key.toLowerCase();}
+if(key==' '){key='{space}';}
 const button=simpleKeyboard.getButtonElement(key);if(button){button.classList.remove('bg-info');}}
-function showGuide(currNode){if(guide){let key=currNode.textContent;const button=simpleKeyboard.getButtonElement(key);if(button){button.classList.add('bg-info');}}}
+function showGuide(currNode){if(guide){let key=currNode.textContent;if(gradeOption.selectedIndex==1){key=key.toUpperCase();}else{key=key.toLowerCase();}
+const button=simpleKeyboard.getButtonElement(key);if(button){button.classList.add('bg-info');}}}
 function typeEvent(event){typeEventKey(event.key);}
 function typeEventKey(key){const currNode=romaNode.childNodes[typeIndex];if(key.match(/^[^0-9]$/)){if(key==currNode.textContent.toLowerCase()){typeNormal(currNode);removeGuide(currNode);underlineSpace(currNode);}else{playAudio(incorrectAudio,0.3);errorCount+=1;}
 if(typeIndex==romaNode.childNodes.length){nextProblem();}else{showGuide(romaNode.childNodes[typeIndex]);}}else{switch(key){case 'NonConvert':[...romaNode.children].forEach(span=>{span.classList.remove('d-none');});downTime(5);break;case 'Convert':const text=romaNode.textContent;loopVoice(text.toLowerCase(),1);break;case 'Escape':case 'Esc':replay();break;}}}

@@ -367,10 +367,20 @@ function removeGuide(currNode) {
   const prevNode = currNode.previousSiblingElement;
   if (prevNode) {
     let key = prevNode.textContent;
+    if (gradeOption.selectedIndex == 0) {
+      key = key.toUpperCase();
+    } else {
+      key = key.toLowerCase();
+    }
     const button = simpleKeyboard.getButtonElement(key);
     button.classList.remove('bg-info');
   }
   let key = currNode.textContent;
+  if (gradeOption.selectedIndex == 1) {
+    key = key.toUpperCase();
+  } else {
+    key = key.toLowerCase();
+  }
   if (key == ' ') { key = '{space}'; }
   const button = simpleKeyboard.getButtonElement(key);
   if (button) {
@@ -381,6 +391,11 @@ function removeGuide(currNode) {
 function showGuide(currNode) {
   if (guide) {
     let key = currNode.textContent;
+    if (gradeOption.selectedIndex == 1) {
+      key = key.toUpperCase();
+    } else {
+      key = key.toLowerCase();
+    }
     const button = simpleKeyboard.getButtonElement(key);
     if (button) {
       button.classList.add('bg-info');
