@@ -558,10 +558,10 @@ function countdown() {
       clearInterval(timer);
       document.getElementById('guideSwitch').disabled = false;
       document.getElementById('virtualKeyboard').disabled = false;
-      countPanel.classList.add('d-none');
-      scorePanel.classList.add('d-none');
       infoPanel.classList.remove('d-none');
       playPanel.classList.remove('d-none');
+      countPanel.classList.add('d-none');
+      scorePanel.classList.add('d-none');
       typable();
       startTypeTimer();
       if (localStorage.getItem('bgm') == 1) {
