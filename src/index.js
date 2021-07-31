@@ -625,7 +625,6 @@ function initTime() {
 
 gradeOption.addEventListener('change', function() {
   initTime();
-  document.addEventListener('keydown', startKeyEvent);
   clearInterval(typeTimer);
 });
 
@@ -644,7 +643,6 @@ function scoring() {
   document.getElementById('totalType').innerText = normalCount + errorCount;
   document.getElementById('typeSpeed').innerText = typeSpeed;
   document.getElementById('errorType').innerText = errorCount;
-  document.addEventListener('keydown', startKeyEvent);
 }
 
 function changeMode() {
