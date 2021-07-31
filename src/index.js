@@ -442,8 +442,8 @@ function replay() {
   initTime();
   countdown();
   typeIndex = normalCount = errorCount = solveCount = 0;
-  countPanel.hidden = false;
-  scorePanel.hidden = true;
+  countPanel.classList.remove('d-none');
+  scorePanel.classList.add('d-none');
 }
 
 function calcAAOuterSize() {
@@ -517,9 +517,6 @@ function typable() {
     clearInterval(typeTimer);
     bgm.pause();
     playAudio(endAudio);
-    infoPanel.classList.add('d-none');
-    countPanel.hidden = true;
-    scorePanel.hidden = false;
     scoring();
   } else {
     aa.textContent = problem + " " + problem.toLowerCase();
@@ -547,8 +544,8 @@ function countdown() {
   document.getElementById('virtualKeyboard').disabled = true;
   infoPanel.classList.add('d-none');
   playPanel.classList.add('d-none');
-  countPanel.hidden = false;
-  scorePanel.hidden = true;
+  countPanel.classList.remove('d-none');
+  scorePanel.classList.add('d-none');
   counter.innerText = 3;
   var timer = setInterval(function(){
     var counter = document.getElementById('counter');
@@ -561,8 +558,8 @@ function countdown() {
       clearInterval(timer);
       document.getElementById('guideSwitch').disabled = false;
       document.getElementById('virtualKeyboard').disabled = false;
-      countPanel.hidden = true;
-      scorePanel.hidden = true;
+      countPanel.classList.add('d-none');
+      scorePanel.classList.add('d-none');
       infoPanel.classList.remove('d-none');
       playPanel.classList.remove('d-none');
       typable();
@@ -583,8 +580,8 @@ function replay() {
   initTime();
   countdown();
   typeIndex = normalCount = errorCount = solveCount = 0;
-  countPanel.hidden = false;
-  scorePanel.hidden = true;
+  countPanel.classList.remove('d-none');
+  scorePanel.classList.add('d-none');
 }
 
 function startKeyEvent(event) {
@@ -604,9 +601,6 @@ function startTypeTimer() {
       clearInterval(typeTimer);
       bgm.pause();
       playAudio(endAudio);
-      infoPanel.classList.add('d-none');
-      countPanel.hidden = true;
-      scorePanel.hidden = false;
       scoring();
     }
   }, 1000);
@@ -636,6 +630,10 @@ gradeOption.addEventListener('change', function() {
 });
 
 function scoring() {
+  infoPanel.classList.add('d-none');
+  playPanel.classList.add('d-none');
+  countPanel.classList.add('d-none');
+  scorePanel.classList.remove('d-none');
   document.removeEventListener('keydown', typeEvent);
   let time = parseInt(document.getElementById('time').textContent);
   if (time < gameTime) {
