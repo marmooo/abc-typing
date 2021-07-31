@@ -1,10 +1,10 @@
 const playPanel = document.getElementById('playPanel');
+const infoPanel = document.getElementById('infoPanel');
 const countPanel = document.getElementById('countPanel');
 const scorePanel = document.getElementById('scorePanel');
 const startButton = document.getElementById('startButton');
 const romaNode = document.getElementById('roma');
 const gradeOption = document.getElementById('gradeOption');
-const infoPanel = document.getElementById('infoPanel');
 const aa = document.getElementById('aa');
 const gameTime = 60;
 const tmpCanvas = document.createElement('canvas');
@@ -517,7 +517,7 @@ function typable() {
     clearInterval(typeTimer);
     bgm.pause();
     playAudio(endAudio);
-    playPanel.classList.add('d-none');
+    infoPanel.classList.add('d-none');
     countPanel.hidden = true;
     scorePanel.hidden = false;
     scoring();
@@ -545,6 +545,7 @@ function countdown() {
   typeIndex = normalCount = errorCount = solveCount = 0;
   document.getElementById('guideSwitch').disabled = true;
   document.getElementById('virtualKeyboard').disabled = true;
+  infoPanel.classList.add('d-none');
   playPanel.classList.add('d-none');
   countPanel.hidden = false;
   scorePanel.hidden = true;
@@ -562,6 +563,7 @@ function countdown() {
       document.getElementById('virtualKeyboard').disabled = false;
       countPanel.hidden = true;
       scorePanel.hidden = true;
+      infoPanel.classList.remove('d-none');
       playPanel.classList.remove('d-none');
       typable();
       startTypeTimer();
@@ -569,22 +571,25 @@ function countdown() {
         bgm.play();
       }
       document.addEventListener('keydown', typeEvent);
-      startButton.addEventListener('click', replay);
+      startButton.disabled = false;
     }
   }, 1000);
 }
 
-function startGame() {
+function replay() {
   clearInterval(typeTimer);
-  startButton.removeEventListener('click', startGame);
-  document.removeEventListener('keydown', startKeyEvent);
+  removeGuide(romaNode.childNodes[typeIndex]);
+  document.removeEventListener('keydown', typeEvent);
   initTime();
   countdown();
+  typeIndex = normalCount = errorCount = solveCount = 0;
+  countPanel.hidden = false;
+  scorePanel.hidden = true;
 }
 
 function startKeyEvent(event) {
   if (event.key == ' ' || event.key == 'Spacebar') {
-    startGame();
+    replay();
   }
 }
 
@@ -599,7 +604,7 @@ function startTypeTimer() {
       clearInterval(typeTimer);
       bgm.pause();
       playAudio(endAudio);
-      playPanel.classList.add('d-none');
+      infoPanel.classList.add('d-none');
       countPanel.hidden = true;
       scorePanel.hidden = false;
       scoring();
@@ -670,7 +675,7 @@ window.addEventListener('resize', function() {
 document.getElementById('gradeOption').onchange = changeGrade;
 document.getElementById('mode').onclick = changeMode;
 document.getElementById('guideSwitch').onchange = toggleGuide;
-startButton.addEventListener('click', startGame);
+startButton.addEventListener('click', replay);
 document.addEventListener('keydown', startKeyEvent);
 document.addEventListener('click', unlockAudio, { once:true, useCapture:true });
 
