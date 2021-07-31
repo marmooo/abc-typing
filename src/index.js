@@ -630,7 +630,7 @@ gradeOption.addEventListener('change', function() {
 });
 
 function scoring() {
-  infoPanel.classList.add('d-none');
+  infoPanel.classList.remove('d-none');
   playPanel.classList.add('d-none');
   countPanel.classList.add('d-none');
   scorePanel.classList.remove('d-none');
