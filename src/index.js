@@ -250,7 +250,11 @@ function showGuide(currNode) {
 }
 
 function typeEvent(event) {
-  typeEventKey(event.key);
+  const key = patchEvent(event);
+  if (key == " " || key == "Spacebar") {
+    event.preventDefault();  // ScrollLock
+  }
+  typeEventKey(key);
 }
 
 function typeEventKey(key) {
@@ -438,6 +442,7 @@ function replay() {
 
 function startKeyEvent(event) {
   if (event.key == " " || event.key == "Spacebar") {
+    event.preventDefault();  // ScrollLock
     document.removeEventListener("keydown", startKeyEvent);
     replay();
   }
