@@ -20,8 +20,8 @@ let key=currNode.textContent;if(gradeOption.selectedIndex==1){key=key.toUpperCas
 if(key==" ")key="{space}";const button=simpleKeyboard.getButtonElement(key);if(button){button.classList.remove("bg-info");}}
 function showGuide(currNode){if(guide){let key=currNode.textContent;if(gradeOption.selectedIndex==1){key=key.toUpperCase();}else{key=key.toLowerCase();}
 const button=simpleKeyboard.getButtonElement(key);if(button){button.classList.add("bg-info");}}}
-function typeEvent(event){const key=patchEvent(event);if(key==" "||key=="Spacebar"){event.preventDefault();}
-typeEventKey(key);}
+function typeEvent(event){if(event.key==" "||event.key=="Spacebar"){event.preventDefault();}
+typeEventKey(event.key);}
 function typeEventKey(key){const currNode=romaNode.childNodes[typeIndex];if(key.match(/^[^0-9]$/)){if(key.toLowerCase()==currNode.textContent.toLowerCase()){typeNormal(currNode);removeGuide(currNode);underlineSpace(currNode);}else{playAudio(incorrectAudio,0.3);errorCount+=1;}
 if(typeIndex==romaNode.childNodes.length){nextProblem();}else{showGuide(romaNode.childNodes[typeIndex]);}}else{switch(key){case "NonConvert":{[...romaNode.children].forEach((span)=>{span.classList.remove("d-none");});downTime(5);break;}
 case "Convert":{const text=romaNode.textContent;loopVoice(text.toLowerCase(),1);break;}
