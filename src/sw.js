@@ -1,13 +1,12 @@
-var CACHE_NAME = '2021-02-19 15:30';
+var CACHE_NAME = '2022-03-06 01:00';
 var urlsToCache = [
   "/abc-typing/",
   "/abc-typing/index.js",
-  "/abc-typing/bgm.mp3",
-  "/abc-typing/cat.mp3",
-  "/abc-typing/correct.mp3",
-  "/abc-typing/end.mp3",
-  "/abc-typing/index.js",
-  "/abc-typing/keyboard.mp3",
+  "/abc-typing/mp3/bgm.mp3",
+  "/abc-typing/mp3/cat.mp3",
+  "/abc-typing/mp3/correct.mp3",
+  "/abc-typing/mp3/end.mp3",
+  "/abc-typing/mp3/keyboard.mp3",
   "/abc-typing/favicon/original.svg",
   "https://marmooo.github.io/fonts/textar-light.woff2",
   "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css",
