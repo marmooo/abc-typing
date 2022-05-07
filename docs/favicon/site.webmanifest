@@ -1,20 +1,20 @@
 {
-    "name": "ABC\u30bf\u30a4\u30d4\u30f3\u30b0",
-    "short_name": "ABC\u30bf\u30a4\u30d4\u30f3\u30b0",
-    "icons": [
-        {
-            "src": "/abc-typing/favicon/android-chrome-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/abc-typing/favicon/android-chrome-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
-    "start_url": "https://marmooo.github.io/abc-typing/",
-    "display": "standalone"
+  "name": "ABCタイピング",
+  "short_name": "ABCタイピング",
+  "icons": [
+    {
+      "src": "/abc-typing/favicon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/abc-typing/favicon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "start_url": "https://marmooo.github.io/abc-typing/",
+  "display": "standalone"
 }
