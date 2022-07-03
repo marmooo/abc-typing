@@ -43,7 +43,7 @@ const layout109 = {
 };
 const simpleKeyboard = new SimpleKeyboard.default({
   layout: layout109,
-  onKeyPress: function (input) {
+  onKeyPress: (input) => {
     typeEventKey(input);
   },
 });
@@ -159,13 +159,13 @@ function loadAudios() {
 
 function loadVoices() {
   // https://stackoverflow.com/questions/21513706/
-  const allVoicesObtained = new Promise(function (resolve) {
+  const allVoicesObtained = new Promise((resolve) => {
     let voices = speechSynthesis.getVoices();
     if (voices.length !== 0) {
       resolve(voices);
     } else {
       let supported = false;
-      speechSynthesis.addEventListener("voiceschanged", function () {
+      speechSynthesis.addEventListener("voiceschanged", () => {
         supported = true;
         voices = speechSynthesis.getVoices();
         resolve(voices);
@@ -403,7 +403,7 @@ function countdown() {
   gamePanel.classList.add("d-none");
   countPanel.classList.remove("d-none");
   counter.textContent = 3;
-  const timer = setInterval(function () {
+  const timer = setInterval(() => {
     const counter = document.getElementById("counter");
     const colors = ["skyblue", "greenyellow", "violet", "tomato"];
     if (parseInt(counter.textContent) > 1) {
@@ -450,7 +450,7 @@ function startKeyEvent(event) {
 
 function startTypeTimer() {
   const timeNode = document.getElementById("time");
-  typeTimer = setInterval(function () {
+  typeTimer = setInterval(() => {
     const arr = timeNode.textContent.split("秒 /");
     const t = parseInt(arr[0]);
     if (t > 0) {
@@ -481,7 +481,7 @@ function initTime() {
     "秒";
 }
 
-gradeOption.addEventListener("change", function () {
+gradeOption.addEventListener("change", () => {
   initTime();
   clearInterval(typeTimer);
 });
@@ -525,7 +525,7 @@ resizeFontSize(aa);
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
 document.getElementById("toggleBGM").onclick = toggleBGM;
 document.getElementById("virtualKeyboard").onclick = toggleKeyboard;
-window.addEventListener("resize", function () {
+window.addEventListener("resize", () => {
   resizeFontSize(aa);
 });
 document.getElementById("gradeOption").onchange = changeGrade;
