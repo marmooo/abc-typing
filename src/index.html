@@ -89,8 +89,8 @@
           </a>
           <div class="navbar-nav">
             <select title="コース" id="gradeOption" class="form-select form-select-sm">
-              <option>abc</option>
-              <option>ABC</option>
+              <option class="notranslate">abc</option>
+              <option class="notranslate">ABC</option>
             </select>
             <button title="物理/仮想キーボード" id="virtualKeyboard" class="btn p-0 ms-1">
               <svg id="virtualKeyboardOn" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="#000000"><path d="M0 0h24v24H0z" fill="none"/><path d="M20 3H4c-1.1 0-1.99.9-1.99 2L2 15c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 3h2v2h-2V6zm0 3h2v2h-2V9zM8 6h2v2H8V6zm0 3h2v2H8V9zm-1 2H5V9h2v2zm0-3H5V6h2v2zm9 7H8v-2h8v2zm0-4h-2V9h2v2zm0-3h-2V6h2v2zm3 3h-2V9h2v2zm0-3h-2V6h2v2zm-7 15l4-4H8l4 4z"/></svg>
@@ -120,32 +120,37 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
         <div id="infoPanel">
           <div class="row">
             <div class="col-sm pb-3">
-              <p>アルファベットが<ruby>初<rt>はじ</rt></ruby>めての<ruby>子<rt>こ</rt></ruby>のためのタイピングです。</p>
-              <p>A から Z までタイプしてみよう！</p>
+              <p>アルファベットが初めての子のためのタイピングです。
+              A から Z までタイプしてみよう！
+              </p>
             </div>
             <div id="timePanel" class="col-sm text-center">
               <div class="alert alert-info">
-                <div class="row flex-wrap">
-                  <div class="col p-1 h5 text-nowrap">
-                    <label><ruby>時間<rp>(</rp><rt>じかん</rt><rp>)</rp></ruby>:</label>
-                    <span id="time" class="ms-1">60秒 / 60秒</span>
+                <div class="d-flex flex-wrap justify-content-center">
+                  <div class="h5 text-nowrap me-4 notranslate">
+                    <span id="time">120</span>
+                    <span> / 120 sec</span>
                   </div>
-                  <div class="col p-1 m-auto">
-                    <button id="mode" class="btn btn-secondary btn-sm">EASY</button>
+                  <div>
                     <div class="form-check form-check-inline form-switch text-nowrap ms-1">
                       <input class="form-check-input" type="checkbox" id="guideSwitch" checked>
                       <label class="form-check-label" for="guideSwitch">ガイド</label>
                     </div>
                   </div>
                 </div>
-                <div>
-                  <button id="startButton" class="btn btm-sm btn-primary">SPACE: スタート / ESC: リセット</button>
+                <div class="mt-2">
+                  <button id="startButton" class="btn btm-sm btn-primary">
+                    <kbd>Space</kbd>
+                    <span class="ms-1">スタート</span>
+                    <kbd class="ms-3">Esc</kbd>
+                    <span class="ms-1">リセット</span>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div id="aaOuter" class="flex-grow-1">
+        <div id="aaOuter" class="flex-grow-1 notranslate">
           <pre id="aa" class="aa">　　　　 　彡⌒ミ
 　　　　 　(´･ω･)
 　　　　　 　/) /)
@@ -160,15 +165,15 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
 　　 　　　∪　　　　　　　　∪　　　　　　彡 ∪
 　　　￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣</pre>
         </div>
-        <div id="playPanel">
+        <div id="playPanel" class="notranslate">
           <div id="keyboard" class="simple-keyboard"></div>
-          <div id="typePanel" class="alert alert-info h1 d-none">
+          <div id="typePanel" class="alert alert-info mb-0 h1 text-center d-none">
             <div id="roma">ABC</div>
           </div>
         </div>
         <div id="scorePanel" class="text-center pb-3 d-none">
-          <h3 class="pt-3">タイピング結果</h3>
-          <pre class="aa">
+          <h3 class="pt-3">スコア</h3>
+          <pre class="aa notranslate">
 　（○）
 　ヽ|〃
 彡⌒ ミ
@@ -182,7 +187,7 @@ sudo apt install festival speech-dispatcher-festival</code></pre>
           </table>
         </div>
       </div>
-      <div id="countPanel" class="text-center d-none">
+      <div id="countPanel" class="text-center d-none notranslate">
         <div id="counter"></div>
         <pre class="aa">
 

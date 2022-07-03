@@ -10,7 +10,6 @@ const romaNode = document.getElementById("roma");
 const gradeOption = document.getElementById("gradeOption");
 const aa = document.getElementById("aa");
 const tmpCanvas = document.createElement("canvas");
-const mode = document.getElementById("mode");
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const gameTime = 60;
 let playing;
@@ -384,9 +383,6 @@ function typable() {
     }
     for (let i = 0; i < roma.length; i++) {
       const span = document.createElement("span");
-      if (mode.textContent != "EASY") {
-        span.style.visibility = "hidden";
-      }
       span.textContent = roma[i];
       romaNode.appendChild(span);
     }
@@ -451,10 +447,9 @@ function startKeyEvent(event) {
 function startTypeTimer() {
   const timeNode = document.getElementById("time");
   typeTimer = setInterval(() => {
-    const arr = timeNode.textContent.split("秒 /");
-    const t = parseInt(arr[0]);
+    const t = parseInt(timeNode.textContent);
     if (t > 0) {
-      timeNode.textContent = (t - 1) + "秒 /" + arr[1];
+      timeNode.textContent = t - 1;
     } else {
       clearInterval(typeTimer);
       bgm.pause();
@@ -464,21 +459,8 @@ function startTypeTimer() {
   }, 1000);
 }
 
-function downTime(n) {
-  const timeNode = document.getElementById("time");
-  const arr = timeNode.textContent.split("秒 /");
-  const t = parseInt(arr[0]);
-  const downedTime = t - n;
-  if (downedTime < 0) {
-    timeNode.textContent = "0秒 /" + arr[1];
-  } else {
-    timeNode.textContent = downedTime + "秒 /" + arr[1];
-  }
-}
-
 function initTime() {
-  document.getElementById("time").textContent = gameTime + "秒 / " + gameTime +
-    "秒";
+  document.getElementById("time").textContent = gameTime;
 }
 
 gradeOption.addEventListener("change", () => {
@@ -503,14 +485,6 @@ function scoring() {
   document.getElementById("errorType").textContent = errorCount;
 }
 
-function changeMode() {
-  if (this.textContent == "EASY") {
-    this.textContent = "HARD";
-  } else {
-    this.textContent = "EASY";
-  }
-}
-
 function changeGrade() {
   const grade = gradeOption.selectedIndex;
   if (grade == 0) {
@@ -529,7 +503,6 @@ window.addEventListener("resize", () => {
   resizeFontSize(aa);
 });
 document.getElementById("gradeOption").onchange = changeGrade;
-document.getElementById("mode").onclick = changeMode;
 document.getElementById("guideSwitch").onchange = toggleGuide;
 startButton.addEventListener("click", replay);
 document.addEventListener("keydown", typeEvent);
