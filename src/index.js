@@ -9,10 +9,11 @@ const startButton = document.getElementById("startButton");
 const romaNode = document.getElementById("roma");
 const gradeOption = document.getElementById("gradeOption");
 const aa = document.getElementById("aa");
-const gameTime = 60;
 const tmpCanvas = document.createElement("canvas");
 const mode = document.getElementById("mode");
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const gameTime = 60;
+let playing;
 let typeTimer;
 // https://dova-s.jp/bgm/play14822.html
 const bgm = new Audio("mp3/bgm.mp3");
@@ -258,13 +259,26 @@ function showGuide(currNode) {
 }
 
 function typeEvent(event) {
-  if (event.key == " " || event.key == "Spacebar") {
-    event.preventDefault();  // ScrollLock
+  switch (event.code) {
+    case "Space":
+      event.preventDefault();
+      // falls through
+    default:
+      return typeEventKey(event.key);
   }
-  typeEventKey(event.key);
 }
 
 function typeEventKey(key) {
+  switch (key) {
+    case "Escape":
+      replay();
+      return;
+    case " ":
+      if (!playing) {
+        replay();
+        return;
+      }
+  }
   const currNode = romaNode.childNodes[typeIndex];
   if (/^[^0-9]$/.test(key)) {
     if (key.toLowerCase() == currNode.textContent.toLowerCase()) {
@@ -284,25 +298,6 @@ function typeEventKey(key) {
       nextProblem();
     } else {
       showGuide(romaNode.childNodes[typeIndex]);
-    }
-  } else {
-    switch (key) {
-      case "NonConvert": {
-        [...romaNode.children].forEach((span) => {
-          span.style.visibility = "visible";
-        });
-        downTime(5);
-        break;
-      }
-      case "Convert": {
-        const text = romaNode.textContent;
-        loopVoice(text.toLowerCase(), 1);
-        break;
-      }
-      case "Escape":
-      case "Esc":
-        replay();
-        break;
     }
   }
 }
@@ -401,6 +396,7 @@ function typable() {
 }
 
 function countdown() {
+  playing = true;
   typeIndex = normalCount = errorCount = solveCount = 0;
   document.getElementById("guideSwitch").disabled = true;
   document.getElementById("virtualKeyboard").disabled = true;
@@ -430,7 +426,6 @@ function countdown() {
       if (localStorage.getItem("bgm") == 1) {
         bgm.play();
       }
-      document.addEventListener("keydown", typeEvent);
       startButton.disabled = false;
     }
   }, 1000);
@@ -439,7 +434,6 @@ function countdown() {
 function replay() {
   clearInterval(typeTimer);
   removeGuide(romaNode.childNodes[typeIndex]);
-  document.removeEventListener("keydown", typeEvent);
   initTime();
   countdown();
   typeIndex = normalCount = errorCount = solveCount = 0;
@@ -450,7 +444,6 @@ function replay() {
 function startKeyEvent(event) {
   if (event.key == " " || event.key == "Spacebar") {
     event.preventDefault();  // ScrollLock
-    document.removeEventListener("keydown", startKeyEvent);
     replay();
   }
 }
@@ -494,12 +487,12 @@ gradeOption.addEventListener("change", function () {
 });
 
 function scoring() {
+  playing = false;
   infoPanel.classList.remove("d-none");
   playPanel.classList.add("d-none");
   aaOuter.classList.add("d-none");
   countPanel.classList.add("d-none");
   scorePanel.classList.remove("d-none");
-  document.removeEventListener("keydown", typeEvent);
   let time = parseInt(document.getElementById("time").textContent);
   if (time < gameTime) {
     time = gameTime - time;
@@ -508,7 +501,6 @@ function scoring() {
   document.getElementById("totalType").textContent = normalCount + errorCount;
   document.getElementById("typeSpeed").textContent = typeSpeed;
   document.getElementById("errorType").textContent = errorCount;
-  document.addEventListener("keydown", startKeyEvent);
 }
 
 function changeMode() {
@@ -540,7 +532,7 @@ document.getElementById("gradeOption").onchange = changeGrade;
 document.getElementById("mode").onclick = changeMode;
 document.getElementById("guideSwitch").onchange = toggleGuide;
 startButton.addEventListener("click", replay);
-document.addEventListener("keydown", startKeyEvent);
+document.addEventListener("keydown", typeEvent);
 document.addEventListener("click", unlockAudio, {
   once: true,
   useCapture: true,
