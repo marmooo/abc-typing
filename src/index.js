@@ -392,6 +392,7 @@ function typable() {
 }
 
 function countdown() {
+  if (playing) return;
   playing = true;
   typeIndex =
     normalCount =
@@ -436,11 +437,6 @@ function replay() {
   removeGuide(romaNode.childNodes[typeIndex]);
   initTime();
   countdown();
-  typeIndex =
-    normalCount =
-    errorCount =
-    solveCount =
-      0;
   countPanel.classList.remove("d-none");
   scorePanel.classList.add("d-none");
 }
