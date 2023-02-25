@@ -476,13 +476,6 @@ function replay() {
   scorePanel.classList.add("d-none");
 }
 
-function startKeyEvent(event) {
-  if (event.key == " " || event.key == "Spacebar") {
-    event.preventDefault(); // ScrollLock
-    replay();
-  }
-}
-
 function startTypeTimer() {
   const timeNode = document.getElementById("time");
   typeTimer = setInterval(() => {
