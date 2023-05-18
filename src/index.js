@@ -48,7 +48,7 @@ loadAudio("end", "mp3/end.mp3");
 loadAudio("keyboard", "mp3/keyboard.mp3");
 loadAudio("correct", "mp3/correct.mp3");
 loadAudio("incorrect", "mp3/cat.mp3");
-let japaneseVoices = [];
+let englishVoices = [];
 loadVoices();
 loadConfig();
 
@@ -192,7 +192,7 @@ function loadVoices() {
     // "com.apple.speech.synthesis.voice.Ralph",
   ];
   allVoicesObtained.then((voices) => {
-    japaneseVoices = voices
+    englishVoices = voices
       .filter((voice) => voice.lang == "en-US")
       .filter((voice) => !jokeVoices.includes(voice.voiceURI));
   });
@@ -201,7 +201,7 @@ function loadVoices() {
 function loopVoice(text, n) {
   speechSynthesis.cancel();
   const msg = new SpeechSynthesisUtterance(text);
-  msg.voice = japaneseVoices[Math.floor(Math.random() * japaneseVoices.length)];
+  msg.voice = englishVoices[Math.floor(Math.random() * englishVoices.length)];
   msg.lang = "en-US";
   for (let i = 0; i < n; i++) {
     speechSynthesis.speak(msg);
