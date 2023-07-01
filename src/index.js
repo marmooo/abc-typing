@@ -54,11 +54,21 @@ loadConfig();
 
 function loadConfig() {
   if (localStorage.getItem("darkMode") == 1) {
-    document.documentElement.dataset.theme = "dark";
+    document.documentElement.setAttribute("data-bs-theme", "dark");
   }
   if (localStorage.getItem("bgm") != 1) {
     document.getElementById("bgmOn").classList.add("d-none");
     document.getElementById("bgmOff").classList.remove("d-none");
+  }
+}
+
+function toggleDarkMode() {
+  if (localStorage.getItem("darkMode") == 1) {
+    localStorage.setItem("darkMode", 0);
+    document.documentElement.setAttribute("data-bs-theme", "light");
+  } else {
+    localStorage.setItem("darkMode", 1);
+    document.documentElement.setAttribute("data-bs-theme", "dark");
   }
 }
 
@@ -99,16 +109,6 @@ function toggleGuide(event) {
     guide = true;
   } else {
     guide = false;
-  }
-}
-
-function toggleDarkMode() {
-  if (localStorage.getItem("darkMode") == 1) {
-    localStorage.setItem("darkMode", 0);
-    delete document.documentElement.dataset.theme;
-  } else {
-    localStorage.setItem("darkMode", 1);
-    document.documentElement.dataset.theme = "dark";
   }
 }
 
@@ -211,7 +211,7 @@ function loopVoice(text, n) {
 function typeNormal(currNode) {
   currNode.style.visibility = "visible";
   playAudio("keyboard");
-  currNode.style.color = "silver";
+  currNode.classList.add("typed");
   typeIndex += 1;
   normalCount += 1;
 }
@@ -243,7 +243,7 @@ function removeGuide(currNode) {
       key = key.toLowerCase();
     }
     const button = simpleKeyboard.getButtonElement(key);
-    button.classList.remove("bg-info");
+    button.classList.remove("guide");
   }
   let key = currNode.textContent;
   if (gradeOption.selectedIndex == 1) {
@@ -254,7 +254,7 @@ function removeGuide(currNode) {
   if (key == " ") key = "{space}";
   const button = simpleKeyboard.getButtonElement(key);
   if (button) {
-    button.classList.remove("bg-info");
+    button.classList.remove("guide");
   }
 }
 
@@ -268,7 +268,7 @@ function showGuide(currNode) {
     }
     const button = simpleKeyboard.getButtonElement(key);
     if (button) {
-      button.classList.add("bg-info");
+      button.classList.add("guide");
     }
   }
 }
