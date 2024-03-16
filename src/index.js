@@ -42,7 +42,7 @@ const simpleKeyboard = new SimpleKeyboard.default({
     typeEventKey(input);
   },
 });
-const audioContext = new AudioContext();
+const audioContext = new globalThis.AudioContext();
 const audioBufferCache = {};
 loadAudio("end", "mp3/end.mp3");
 loadAudio("keyboard", "mp3/keyboard.mp3");
@@ -200,7 +200,7 @@ function loadVoices() {
 
 function loopVoice(text, n) {
   speechSynthesis.cancel();
-  const msg = new SpeechSynthesisUtterance(text);
+  const msg = new globalThis.SpeechSynthesisUtterance(text);
   msg.voice = englishVoices[Math.floor(Math.random() * englishVoices.length)];
   msg.lang = "en-US";
   for (let i = 0; i < n; i++) {
@@ -509,7 +509,7 @@ resizeFontSize(aa);
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
 document.getElementById("toggleBGM").onclick = toggleBGM;
 document.getElementById("virtualKeyboard").onclick = toggleKeyboard;
-window.addEventListener("resize", () => {
+globalThis.addEventListener("resize", () => {
   resizeFontSize(aa);
 });
 document.getElementById("gradeOption").onchange = changeGrade;
