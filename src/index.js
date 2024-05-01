@@ -1,3 +1,5 @@
+import simpleKeyboard from "https://cdn.jsdelivr.net/npm/simple-keyboard@3.7.77/+esm";
+
 const remSize = parseInt(getComputedStyle(document.documentElement).fontSize);
 const gamePanel = document.getElementById("gamePanel");
 const playPanel = document.getElementById("playPanel");
@@ -36,7 +38,7 @@ const layout109 = {
     "Z X C V B N M < >",
   ],
 };
-const simpleKeyboard = new SimpleKeyboard.default({
+const keyboard = new simpleKeyboard.default({
   layout: layout109,
   onKeyPress: (input) => {
     typeEventKey(input);
@@ -242,7 +244,7 @@ function removeGuide(currNode) {
     } else {
       key = key.toLowerCase();
     }
-    const button = simpleKeyboard.getButtonElement(key);
+    const button = keyboard.getButtonElement(key);
     button.classList.remove("guide");
   }
   let key = currNode.textContent;
@@ -252,7 +254,7 @@ function removeGuide(currNode) {
     key = key.toLowerCase();
   }
   if (key == " ") key = "{space}";
-  const button = simpleKeyboard.getButtonElement(key);
+  const button = keyboard.getButtonElement(key);
   if (button) {
     button.classList.remove("guide");
   }
@@ -266,7 +268,7 @@ function showGuide(currNode) {
     } else {
       key = key.toLowerCase();
     }
-    const button = simpleKeyboard.getButtonElement(key);
+    const button = keyboard.getButtonElement(key);
     if (button) {
       button.classList.add("guide");
     }
@@ -498,9 +500,9 @@ function scoring() {
 function changeGrade() {
   const grade = gradeOption.selectedIndex;
   if (grade == 0) {
-    simpleKeyboard.setOptions({ layoutName: "default" });
+    keyboard.setOptions({ layoutName: "default" });
   } else {
-    simpleKeyboard.setOptions({ layoutName: "shift" });
+    keyboard.setOptions({ layoutName: "shift" });
   }
 }
 
