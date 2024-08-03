@@ -309,11 +309,11 @@ function typeEvent(event) {
 function typeEventKey(key) {
   switch (key) {
     case "Escape":
-      replay();
+      startGame();
       return;
     case " ":
       if (!playing) {
-        replay();
+        startGame();
         return;
       }
   }
@@ -466,7 +466,7 @@ function countdown() {
   }, 1000);
 }
 
-function replay() {
+function startGame() {
   clearInterval(typeTimer);
   removeGuide(romaNode.childNodes[typeIndex]);
   initTime();
@@ -535,7 +535,7 @@ globalThis.addEventListener("resize", () => {
 });
 document.getElementById("gradeOption").onchange = changeGrade;
 document.getElementById("guideSwitch").onchange = toggleGuide;
-startButton.addEventListener("click", replay);
+startButton.addEventListener("click", startGame);
 document.addEventListener("keydown", typeEvent);
 document.addEventListener("pointerdown", unlockAudio, { once: true });
 document.addEventListener("keydown", unlockAudio, { once: true });
