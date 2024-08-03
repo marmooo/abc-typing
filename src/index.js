@@ -444,6 +444,8 @@ function countdown() {
     } else {
       countdowning = false;
       playing = true;
+      const currNode = romaNode.childNodes[typeIndex];
+      removeGuide(currNode);
       typeIndex =
         normalCount =
         errorCount =
@@ -468,7 +470,6 @@ function countdown() {
 
 function startGame() {
   clearInterval(typeTimer);
-  removeGuide(romaNode.childNodes[typeIndex]);
   initTime();
   countdown();
   countPanel.classList.remove("d-none");
