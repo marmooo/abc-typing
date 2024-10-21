@@ -105,8 +105,10 @@ function toggleKeyboard() {
 function toggleGuide(event) {
   if (event.target.checked) {
     guide = true;
+    showGuide(romaNode.childNodes[typeIndex]);
   } else {
     guide = false;
+    removeGuide(romaNode.childNodes[typeIndex]);
   }
 }
 
@@ -444,8 +446,7 @@ function countdown() {
     } else {
       countdowning = false;
       playing = true;
-      const currNode = romaNode.childNodes[typeIndex];
-      removeGuide(currNode);
+      removeGuide(romaNode.childNodes[typeIndex]);
       typeIndex =
         normalCount =
         errorCount =
