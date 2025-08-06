@@ -120,10 +120,6 @@ function createAudioContext() {
 }
 
 function unlockAudio() {
-  const uttr = new SpeechSynthesisUtterance("");
-  uttr.lang = "en-US";
-  speechSynthesis.speak(uttr);
-
   if (audioContext) {
     audioContext.resume();
   } else {
@@ -431,6 +427,8 @@ function typable() {
 function countdown() {
   if (countdowning) return;
   countdowning = true;
+  loopVoice("Ready", 1); // unlock
+
   if (localStorage.getItem("bgm") == 1) bgm.play();
   document.getElementById("guideSwitch").disabled = true;
   document.getElementById("virtualKeyboard").disabled = true;
